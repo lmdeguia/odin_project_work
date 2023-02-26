@@ -1,0 +1,25 @@
+h1{
+    text-align: center;
+}
+
+.selections{
+    display:flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.scorebox{
+    display: flex;
+    justify-content: center;
+}
+
+.scorecard{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.choice{
+    display: inline-block;
+}
