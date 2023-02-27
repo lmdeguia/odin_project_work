@@ -1,0 +1,50 @@
+html, body{
+    background-color: blanchedalmond;
+}
+
+h1{
+    text-align: center;
+    font-size: 48px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.container{
+    display:flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.grid{
+    display: grid;
+    background-color: white;
+    height: 512px;
+    width: 512px;
+    border: 2px solid black;
+}
+
+
+#clear{
+    cursor: pointer;
+    background-color: #3882F6;
+    color: white;
+    margin-left: 20px;
+    border-radius: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 0px;
+}
+
+#clear:hover{
+    transform: scale(1.1);
+}
+
+
+/* .size{
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+} */
+
+/* .grid-element{
+    border: 1px solid black;
+} */
