@@ -64,24 +64,3 @@ playerChoices.forEach(
             playRound(playerChoice, computerChoice);
         })
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
