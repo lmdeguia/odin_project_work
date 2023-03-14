@@ -5,15 +5,59 @@
   --border-thickness: 3px;
   --grid-border-rad: 30px;
   --container-vpadding: 10rem;
+  --spacing-sm: 10px;
+  --spacing-xxlg: 100px;
+  --background-col1: #d7d6d6;
 }
 
 html, body{
+  background-color: #1F2937;
   font-family: 'Roboto', sans-serif;
   padding: 0;
   margin: 0;
 }
 
+
+/* sidenav */
+.sidenav {
+  text-align: center;
+  color: #f1f1f1;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #3f4752;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+/*  */
+
 .container{
+  background-color: #aaaaaa;
   margin: auto;
   margin-top: var(--medium-space);
   display: flex;
@@ -25,13 +69,73 @@ html, body{
   height: 700px;
 }
 
+#grid-heading{
+  font-size: 48px;
+}
+
+.msg{
+  animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+  0%{     color: #110df0;    }
+  49%{    color: #110df0; }
+  60%{    color: transparent; }
+  99%{    color:transparent;  }
+  100%{   color: #110df0;    }
+}
+
+
+.heading-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-left: 4rem;
+}
+
+
+
+.msg-container{
+  text-align: center;
+}
+
+
+.gear-container{
+  background-color: var(--background-col1);
+  /* position: relative;
+  bottom: 2rem;
+  left: 5rem; */
+  /* margin-left: 2rem; */
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 48px;
+}
+
+.gear-container:hover{
+  transform: scale(1.2);
+}
+
+.fa-gear{
+  cursor: pointer;
+  text-align: center;
+  width: 48px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.fa-gear:hover{
+  transform: rotate(180deg) scale(1.1);
+}
+
+
 
 .controls{
   margin-top: var(--medium-space);
   margin-bottom: var(--medium-space);
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 
@@ -49,7 +153,7 @@ html, body{
 .grid-cell{
   cursor: pointer;
   font-size: 75px;
-  background-color: white;
+  background-color: var(--background-col1);
   border-left: var(--border-thickness) solid black;
   border-bottom: var(--border-thickness) solid black;
   display: flex;
@@ -68,4 +172,207 @@ html, body{
 .top-right-corner{border-top-right-radius: var(--grid-border-rad);}
 .bot-left-corner{border-bottom-left-radius: var(--grid-border-rad);}
 .bot-right-corner{border-bottom-right-radius: var(--grid-border-rad);}
+
+
+#clear{
+  font-size: 30px;
+  cursor: pointer;
+  background-color: var(--background-col1);
+  color: black;
+  border: 3px solid black;
+  font-weight: 700;
+  border-radius: 10px;
+  padding-right: var(--spacing-sm);
+  padding-left: var(--spacing-sm);
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+#viewScores{
+  font-size: 12px;
+  cursor: pointer;
+  background-color: var(--background-col1);
+  color: black;
+  border: 2px solid black;
+  font-weight: 800;
+  border-radius: 10px;
+  padding-right: var(--spacing-sm);
+  padding-left: var(--spacing-sm);
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+#clear:hover, #viewScores:hover{
+  transform: scale(1.1);
+}
+
+
+
+
+
+
+
+.fa-cat {
+  margin-left: 10px;
+  font-size: 24px;
+  color: white;
+}
+
+.fa-cat:hover {
+  transform: scale(1.2);
+}
+
+
+
+
+/* modal styling */
+
+.modal-canvas{
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal{
+  color: #aaaaaa;
+  position: fixed;
+  text-align: center;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  height: 50%;
+  border-radius: 10px;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 0.2s ease-in-out;
+}
+
+.modal.active{
+  background-color: #3f4752;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.close{
+  position: relative;
+  top: 5px;
+  left: 10rem;
+  color: #aaaaaa;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.menu{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.options-label{
+  font-size: 20px;
+}
+
+.options{
+  cursor: pointer;
+  background-color: var(--background-col1);
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+.options-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.formText{
+  font-size: 1.5rem;
+  color: white;
+  width: 80%;
+  background-color: #3f4752;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 1px solid #1F2937;
+  caret-color: white;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+input:focus {
+  outline: none;
+}
+
+
+.confirm-buttons{
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* modal buttons */
+#start-confirm{
+  font-size: 1.3rem;
+  cursor: pointer;
+  background-color: #3882F6;
+  color: #F9FAF8;
+  border: 0px solid #3882F6;
+  border-radius: 7px;
+  padding-right: var(--spacing-sm);
+  padding-left: var(--spacing-sm);
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+#start-confirm:hover{
+  transform: scale(1.1);
+}
+
+
+#cancel-confirm{
+  font-size: 1.3rem;
+  cursor: pointer;
+  background-color: #1F2937;
+  color: #F9FAF8;
+  border: 0px;
+  border-radius: 7px;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+#add-confirm:hover, #cancel-confirm:hover{
+  transform: scale(1.1);
+}
+
+.close:hover,
+.close:focus {
+  color: #1F2937;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.footer{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1F2937;
+  color: white;
+  text-align: center;
+  padding-top: var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
+}
 

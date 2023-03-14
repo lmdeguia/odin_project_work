@@ -34,11 +34,13 @@ addBook.onclick = function () {
 closeBtn.onclick = function () {
   modal.classList.remove('active');
   modalCanvas.style.display = 'none';
+  return false;
 };
 
 cancelBtn.onclick = function () {
   modal.classList.remove('active');
   modalCanvas.style.display = 'none';
+  return false;
 };
 
 // const test = document.querySelector('.hasreadBtn');
@@ -112,6 +114,7 @@ const addBooktoGrid = (obj, idx) => {
   gridContainer.appendChild(newBook);
 };
 const form = document.querySelector('.addbookForm');
+form.addEventListener('submit', (e) => { e.preventDefault(); });
 const addBtn = document.querySelector('#add-confirm');
 
 const addBookfromForm = () => {
