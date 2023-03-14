@@ -7,12 +7,12 @@ function sleep(ms) {
 }
 
 
-const Player = (type, marker) => {
+const Player = (name, type, marker) => {
   let wins = 0, losses = 0, ties = 0;
-  return {type, marker, wins, losses, ties}
+  return {name, type, marker, wins, losses, ties}
 }
-const Player1 = Player('human', 'X');
-const Player2 = Player('human', 'O');
+const Player1 = Player('Player 1', 'human', 'X');
+const Player2 = Player('Player 2', 'human', 'O');
 firstPlayer = (Player1.marker === 'X') ? Player1 : Player2;
 
 
@@ -251,11 +251,7 @@ const gameController = (() => {
 })()
 
 
-
-
-
 // modal menu
-
 let startFlag = true;
 
 const icon = document.querySelector('.fa');
@@ -270,16 +266,19 @@ icon.onclick = function () {
 };
 
 // menu options
-
 const matchType = document.querySelector('#matchType');
 const playerChoice = document.querySelector('#playerChoice');
 const difficulty = document.querySelector('#difficulty');
 const modalTitle = document.querySelector('#modal-title')
 const welcomeMsg = document.querySelector('#welcome-msg');
+const playerOneName = document.querySelector('#playeroneName')
+const playerTwoName = document.querySelector('#playertwoName')
 
 let currentMatchType = 'Player vs. Player';
 let currentChoice = 'X';
 let currentDifficulty = 'Easy';
+let currentp1Name = 'Player 1';
+let currentp2Name = 'Player 2';
 
 const matchConditions = () => {
   if (matchType.value === 'Player vs. Computer'){
@@ -297,6 +296,8 @@ closeBtn.onclick = function () {
     matchType.value = currentMatchType;
     playerChoice.value = currentChoice;
     difficulty.value = currentDifficulty;
+    playerOneName.value = Player1.name
+    playerTwoName.value = Player2.name
     matchConditions();
     modal.classList.remove('active');
     modalCanvas.style.display = 'none';
@@ -310,6 +311,58 @@ matchType.addEventListener('change',
       e.preventDefault();
       matchConditions();
     });
+
+
+
+
+// sidenav
+
+function openNav() {
+  document.getElementById("mySidenav").style.width = "400px";
+  modalCanvas.style.display = 'block';
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  modalCanvas.style.display = 'none';
+}
+
+const clearBtn = document.querySelector('#clear');
+const p1ScoreDetails = document.querySelector('.p1ScoreDetails')
+const p1ScoreHeader = document.querySelector('#playeroneScore-heading')
+
+const p2ScoreDetails = document.querySelector('.p2ScoreDetails')
+const p2ScoreHeader = document.querySelector('#playertwoScore-heading')
+const resetScores = document.querySelector('#resetScores');
+
+
+
+function setScores(){
+  p1ScoreDetails.innerHTML =
+  `<p>Wins: ${Player1.wins}</p>
+  <p>Losses: ${Player1.losses}</p>
+  <p>Ties: ${Player1.ties}</p>`;
+
+  p2ScoreDetails.innerHTML =
+  `<p>Wins: ${Player2.wins}</p>
+  <p>Losses: ${Player2.losses}</p>
+  <p>Ties: ${Player2.ties}</p>`;
+}
+
+function resetScoresf() {
+  Player1.wins = 0;
+  Player1.losses = 0;
+  Player1.ties = 0;
+
+  Player2.wins = 0;
+  Player2.losses = 0;
+  Player2.ties = 0;
+
+  setScores();
+}
+
+resetScores.addEventListener('click', resetScoresf);
+clearBtn.addEventListener('click', setScores)
 
 
 
@@ -335,7 +388,26 @@ form.addEventListener('submit',
         firstPlayer = (Player1.marker === 'X') ? Player1 : Player2;
         gameController.clearBoard();
       }
+
+      Player1.name = playerOneName.value;
+      Player2.name = playerTwoName.value;
       
+      resetScoresf();
+
+      p1ScoreHeader.textContent = `${Player1.name}`;
+      p2ScoreHeader.textContent = `${Player2.name}`;
+
+      p1ScoreDetails.innerHTML =
+      `<p>Wins: ${Player1.wins}</p>
+      <p>Losses: ${Player1.losses}</p>
+      <p>Ties: ${Player1.ties}</p>`;
+    
+      p2ScoreDetails.innerHTML =
+      `<p>Wins: ${Player2.wins}</p>
+      <p>Losses: ${Player2.losses}</p>
+      <p>Ties: ${Player2.ties}</p>`;
+      
+
       if (startFlag){
         modalTitle.textContent = "Settings";
         firstPlayer = (Player1.marker === 'X') ? Player1 : Player2;
@@ -344,19 +416,5 @@ form.addEventListener('submit',
         if (firstPlayer.type === 'robot') {
           setTimeout(() => {gameBoard.robotLogic(firstPlayer.marker);}, 500);
         }
-  
       }
     })
-
-
-// sidenav
-
-function openNav() {
-  document.getElementById("mySidenav").style.width = "400px";
-  modalCanvas.style.display = 'block';
-}
-
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-  modalCanvas.style.display = 'none';
-}
